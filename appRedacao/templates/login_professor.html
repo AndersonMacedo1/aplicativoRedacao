@@ -1,0 +1,155 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Escrevendo na Quarentena</title>
+    <link rel="icon" href='{% static 'assets/img/logo.ico' %}' alt="Minha Imagem">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .header {
+            padding: 20px;
+            text-align: center;
+            background-color: #343a40;
+            width: auto;
+            left: 0;
+            right: 0;
+        }
+
+        body {
+            background-color: #550a8a;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .header {
+            padding: 25px;
+            text-align: left;
+            background-color: #343a40;
+            width: auto;
+            left: 0;
+            right: 0;
+        }
+
+        .header img {
+            width: 50px;
+            height: auto;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .text1,
+        .text2 {
+            display: inline-block;
+        }
+
+        .content {
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        .cadastro {
+            display: inline-block;
+            margin-top: 50px;
+        }
+
+        .cadastro form {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cadastro input[type="email"],
+        .cadastro input[type="password"] {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .cadastro button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .cadastro button:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #343a40;
+            width: auto;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .footer a {
+            color: #ffffff;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src='{% static 'assets/img/logo.png' %}' id="logo" alt="Logo">
+        <div class="text1">Login</div>
+        <div class="text2">do Professor</div>
+    </div>
+
+    <div class="container">
+
+        <div class="content">
+            <div class="cadastro">
+                {% if error_messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in error_messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <form method="POST" class="bg-dark p-4 rounded">
+
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button type="submit">Login</button>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="footer">
+
+            <div>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                &copy; 2024 Todos os direitos reservados.
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
