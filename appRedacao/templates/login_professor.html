@@ -1,155 +1,262 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Escrevendo na Quarentena</title>
-    <link rel="icon" href='{% static 'assets/img/logo.ico' %}' alt="Minha Imagem">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="logo.ico">
     <style>
-        .header {
-            padding: 20px;
-            text-align: center;
-            background-color: #343a40;
-            width: auto;
-            left: 0;
-            right: 0;
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         body {
-            background-color: #550a8a;
-            color: #ffffff;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
             margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: rgba(52, 58, 64, 0.8);
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.8s;
+        }
+
+        #configuracoes {
+            background-color: rgba(52, 58, 64, 0.8);
+            color: white;
+            transition: background-color 0.8s;
+        }
+
+        #configuracoes:hover {
+            background-color: purple;
+        }
+
+        #historico-redacao {
+            background-color: rgba(52, 58, 64, 0.8);
+            color: white;
+            transition: background-color 0.8s;
+        }
+
+        #historico-redacao:hover {
+            background-color: purple;
+        }
+
+        #corrigir-redacoes {
+            background-color: rgba(52, 58, 64, 0.8);
+            color: white;
+            transition: background-color 0.8s;
+        }
+
+        #corrigir-redacoes:hover {
+            background-color: purple;
+        }
+
+        .logout {
+            background-color: #495057;
+            color: white;
+            transition: background-color 0.8s;
+        }
+
+        .logout:hover {
+            background-color: #c82333;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
         }
 
         .header {
-            padding: 25px;
-            text-align: left;
-            background-color: #343a40;
-            width: auto;
-            left: 0;
-            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(52, 58, 64, 0.8);
+            color: white;
         }
 
-        .header img {
+        .header .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .profile img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        #logo {
             width: 50px;
             height: auto;
             border-radius: 50%;
             margin-right: 10px;
-        }
-
-        .text1,
-        .text2 {
             display: inline-block;
+            vertical-align: middle;
         }
 
-        .content {
-            padding-top: 50px;
-            text-align: center;
-        }
-
-        .cadastro {
-            display: inline-block;
-            margin-top: 50px;
-        }
-
-        .cadastro form {
-            width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .cadastro input[type="email"],
-        .cadastro input[type="password"] {
+        .area-estudo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
             width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            height: 70px;
         }
-
-        .cadastro button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
+        .btn-enviar-nota {
+            background-color: #3BE88A;
+            color: black;
+            padding: 10px 20px;
             border: none;
-            background-color: #007bff;
-            color: #ffffff;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 4px;
+            transition: background-color 0.3s;
+            box-shadow: 2px 2px 2px black;
         }
 
-        .cadastro button:hover {
-            background-color: #0056b3;
-        }
-
-        .footer {
-            padding: 20px;
-            text-align: center;
-            background-color: #343a40;
-            width: auto;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-
-        .footer a {
-            color: #ffffff;
-            margin-right: 10px;
+        .btn-enviar-nota:hover {
+            background-color: #3BCA8A;
         }
     </style>
+    <title>Painel do Professor</title>
 </head>
-
 <body>
-
     <div class="header">
-        <img src='{% static 'assets/img/logo.png' %}' id="logo" alt="Logo">
-        <div class="text1">Login</div>
-        <div class="text2">do Professor</div>
-    </div>
-
-    <div class="container">
-
-        <div class="content">
-            <div class="cadastro">
-                {% if error_messages %}
-                <div class="alert alert-danger" role="alert">
-                    {% for message in error_messages %}
-                    {{ message }}
-                    {% endfor %}
-                </div>
-                {% endif %}
-                <form method="POST" class="bg-dark p-4 rounded">
-
-                    {% csrf_token %}
-                    {{ form.as_p }}
-
-                    <button type="submit">Login</button>
-
-                </form>
-            </div>
+        <div class="profile">
+            <img src="usuario.png" alt="Foto do Professor">
+            <span>Professor</span>
         </div>
-
-        <div class="footer">
-
-            <div>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                &copy; 2024 Todos os direitos reservados.
-            </div>
+        <div class="area-estudo">
+            <img src="logo.jpg" id="logo">
+            <span>Área do Professor</span>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div style="display: flex; height: 100%;">
+        <div class="sidebar">
+            <h2>Painel do Professor</h2>
+            <a href="#" id="historico-redacao">Histórico de Redação</a>
+            <a href="#" id="corrigir-redacoes">Corrigir Redações</a>
+            <a href="#" id="configuracoes">Configurações</a>
+            <a href="#" class="logout" id="logout">Logout</a>
+        </div>
+        <div class="content" id="content">
+        </div>
+    </div>
+    <script>
+        const redacoesEntregues = 10;
+        const redacoesCorrigidas = 7;
+
+        document.getElementById('historico-redacao').addEventListener('click', function () {
+            document.getElementById('content').innerHTML = `
+                <h1>Histórico de Redação</h1>
+                <p>Quantidade de Redações Entregues: ${redacoesEntregues}</p>
+                <p>Quantidade de Redações Corrigidas: ${redacoesCorrigidas}</p>
+            `;
+        });
+
+        document.getElementById('corrigir-redacoes').addEventListener('click', function () {
+            document.getElementById('content').innerHTML = ''; 
+            const contentDiv = document.getElementById('content');
+
+            const h1 = document.createElement('h1');
+            h1.textContent = 'Corrigir Redações';
+            contentDiv.appendChild(h1);
+
+            const p = document.createElement('p');
+            p.textContent = 'Conteúdo para Corrigir Redações.';
+            contentDiv.appendChild(p);
+
+            const label = document.createElement('label');
+            label.setAttribute('for', 'nota');
+            label.textContent = 'Insira a nota:';
+            contentDiv.appendChild(label);
+
+            const inputNota = document.createElement('input');
+            inputNota.setAttribute('type', 'number');
+            inputNota.setAttribute('id', 'nota');
+            inputNota.setAttribute('name', 'nota');
+            contentDiv.appendChild(inputNota);
+
+            const btnEnviarNota = document.createElement('button');
+            btnEnviarNota.textContent = 'Enviar Nota';
+            btnEnviarNota.addEventListener('click', enviarNota);
+            contentDiv.appendChild(btnEnviarNota);
+        });
+
+        document.getElementById('configuracoes').addEventListener('click', function () {
+            document.getElementById('content').innerHTML = '<h1>Configurações</h1><p>Conteúdo das Configurações.</p>';
+        });
+
+        document.getElementById('logout').addEventListener('click', function () {
+            alert('Você saiu do sistema.');
+        });
+
+        function enviarNota() {
+            const nota = document.getElementById('nota').value;
+            alert(`Nota enviada: ${nota}`);
+        }
+        document.getElementById('corrigir-redacoes').addEventListener('click', function () {
+            document.getElementById('content').innerHTML = ''; 
+            const contentDiv = document.getElementById('content');
+
+            const h1 = document.createElement('h1');
+            h1.textContent = 'Corrigir Redações';
+            contentDiv.appendChild(h1);
+
+            const p = document.createElement('p');
+            p.textContent = 'Conteúdo para Corrigir Redações.';
+            contentDiv.appendChild(p);
+
+            const label = document.createElement('label');
+            label.setAttribute('for', 'nota');
+            label.textContent = 'Insira a nota:';
+            contentDiv.appendChild(label);
+
+            const inputNota = document.createElement('input');
+            inputNota.setAttribute('type', 'number');
+            inputNota.setAttribute('id', 'nota');
+            inputNota.setAttribute('name', 'nota');
+            contentDiv.appendChild(inputNota);
+
+            const btnEnviarNota = document.createElement('button');
+            btnEnviarNota.textContent = 'Enviar Nota';
+            btnEnviarNota.classList.add('btn-enviar-nota');
+            btnEnviarNota.addEventListener('click', enviarNota);
+            contentDiv.appendChild(btnEnviarNota);
+        });
+    </script>
 </body>
-
 </html>
