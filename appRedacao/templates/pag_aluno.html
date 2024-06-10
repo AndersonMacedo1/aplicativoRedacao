@@ -168,7 +168,6 @@
         <div class="sidebar">
             <h2>Painel do Aluno</h2>
             <a href="#" id="historico-redacao">Histórico de Redação</a>
-            <a href="#" id="corrigir-redacoes">Corrigir Redações</a>
             <a href="#" id="configuracoes">Configurações</a>
             <a href="#" class="logout" id="logout">Logout</a>
         </div>
@@ -177,19 +176,13 @@
     </div>
     <script>
         const redacoesEntregues = 10;
-        const redacoesCorrigidas = 7;
 
         document.getElementById('historico-redacao').addEventListener('click', function () {
             document.getElementById('content').innerHTML = `
                 <h1>Histórico de Redação</h1>
                 <p>Quantidade de Redações Entregues: ${redacoesEntregues}</p>
-                <p>Quantidade de Redações Corrigidas: ${redacoesCorrigidas}</p>
-            `;
+               ;
         });
-
-        document.getElementById('corrigir-redacoes').addEventListener('click', function () {
-            document.getElementById('content').innerHTML = ''; 
-            const contentDiv = document.getElementById('content');
 
             const h1 = document.createElement('h1');
             h1.textContent = 'Corrigir Redações';
